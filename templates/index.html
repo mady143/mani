@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <h1>Arogyarahasya Chatterbot</h1>
+   
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Hi! My name is Bot, How may i help you right</span></p>
+      </div>
+      <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Message">
+        <input class='btn btn-primary' id="buttonInput" type="submit" value="Send"><br><br>
+
+        <button class='btn btn-success' type="submit" id = "speechInput"><i class="fas fa-microphone"></i></button>
+
+        <br>
+        <br>
+      </div>
+     <script>
+        regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+        var res2=[];
+        var y =[];
+        var x = [];
+        
+        var l;
+        var botHtml = ' ';
+        var test = false;
+        var test1 = true
+
+       
+        function getBotResponse(data = null) {
+         
+          var rawText = data ? data : $("#textInput").val();
+          
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get", { msg: rawText }).done(function(data) {
+            
+            var botHtml = '<h4>Available Products/Brands are:</h4> <br>';
+            var preData = data;
+            /*var res2=[];
+            var y =[];
+            var x = [];*/
+            if (preData.includes("&&"))
+            {
+
+              var res = preData.split("&&");
+              /*console.log("result",res)*/
+              for (l in res) 
+              { 
+                
+                if (regexp.test(data))
+                {
+                  
+                 var final = res[l].substr(res[l].lastIndexOf('=') + 1) ;
+                  var final1 = final.replace(/\+/g, ' ');
+
+                  botHtml = botHtml+ '<br>' +'<button  class="botText btn btn-primary" style="background-color:#E4EA71;margin-right:10px;margin-top:12px;color:black;"><a href="'+res[l]+'" target="_blank">' +"Click here for "+ final1 + " Products"+ '</a></button>';
+                  '<div class="btn-group">'
+                  botHtml = botHtml + '<br>' + '<button class="btn btn-primary" Style="margin-top: 13px;margin-left:10px" type="submit" value="'+ final1 +'" onclick="myCart(this.value)" id ="cart"><i class="fas fa-shopping-cart"></i> Add TO Cart</button>';
+
+                  /*botHtml = botHtml +  '<button class="btn btn-sucess" Style="margin-top: 12px;margin-left:10px;" type="submit"id ="qty"><i class="fas fa-sort-amount-up"></i>QTY</button>';
+
+                  botHtml = botHtml + '<button class="btn btn-info btn-md" style="margin-top: 12px;margin-left:10px;"  type="submit"><i class="fas fa-info-circle"></i> Show Details</button>';'<br>'*/
+                  
+                }
+                else
+                {
+                  var final = res[l].substr(res[l].lastIndexOf('=') + 1) ;
+                  var final1 = final.replace(/\+/g, ' ');
+
+                  botHtml = botHtml+ '<br>' +'<button id = "myButton1" value="'+ res[l] +'" onclick="myFunction(this.value)" class="botText btn btn-primary" style="background-color:#E4EA71;margin-right:10px;margin-top:10px;color:black;">' +"Click here for "+ final1 + " Products"+ '</button>';
+                }
+               
+               }            
+             
+            }
+
+            else if (regexp.test(data))
+            { 
+            var final1 = data.substr(data.lastIndexOf('=') + 1) ;
+            var final2 = final1.replace(/\+/g, ' ');
+            var botHtml = '<button class="botText btn btn-primary" style="background-color:#E4EA71;color:black;"><a href="'+data+'" target="_blank">'
+               +"click here for "  + final2 +  " products"+ '</a></button>';
+            }
+            else
+            { var botHtml = '<p class="botText"><span>' + data + '</span></p>'; }
+
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          });
+        }
+        
+        $("#textInput").keypress(function(e) {
+            /*console.log(e.which)*/
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+     
+        function myFunction(e) {
+            
+            getBotResponse(e)
+
+            console.log(e); 
+        }
+        $("#buttonInput").click(function() {
+          getBotResponse();
+        })
+        $("#speechInput").click(function() {
+          $.get("/get_speech").done(function(data) {
+            $("#textInput").val(data)
+          
+          });
+        })
+        function myCart(x = null){
+          var rawText = x ? x : $("#textInput").val();
+          console.log("product_name:",x)
+         var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get_cart",{ msg: rawText }).done(function(x) {
+            var data = x
+            console.log("checkout_url",data)
+              if (regexp.test(data))
+              {
+                console.log("checkout_url_inside",data)
+                botHtml = '<button class="botText btn btn-primary" id="checkout onclick = myCheckout() "style="background-color:#E4EA71;margin-right:10px;margin-top:10px;color:black;"><a href="'+data+'" target="_blank">' +"Click here for check out "+ '</a></button>';
+                
+              }
+              
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            /*else
+            { var botHtml = '<p class="botText"><span>' + data + '</span></p>'; }*/
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            
+          
+          });
+
+          
+        
+        }
+        function myCheckout(){
+          $('#checkout').delay(10000);
+        }
+        
+        
+      </script> 
+    </div>
+  </body>
+</html>
+
+
+
+<!-- 8121110240 -->
