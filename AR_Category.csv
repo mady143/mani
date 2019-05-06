@@ -1,0 +1,257 @@
+category_id,category_name,parent_id
+1,Root Catalog,0
+2,Arogyarahasya Category,1
+381,Organic Food,2
+382,Beauty Care,2
+383,Cow Products,2
+384,Ayurvedic Supplements,2
+385,Home Enlightenment,2
+386,Rice,381
+387,Oils and Ghee,381
+388,Sugar and Salts,381
+389,Flours,381
+390,Pulses,381
+391,Face Care,382
+392,Hair Care,382
+393,Body Care,382
+394,Premium Soaps and Face Packs,382
+395,Eye Care,382
+396,Ark,383
+397,Ghee,383
+398,Ayurvedic Churna's,384
+399,Personal Care,384
+400,Health Condition,384
+401,Ayurvedic Juices,384
+402,Pain Relief Oils And Powder,384
+403,Dhoop Sticks Coils,385
+404,Freshners and Perfumes,385
+405,Cd,385
+406,Books,385
+407,Kiddy Banks,385
+408,Honey,381
+409,Jaggery,381
+410,Condiments,381
+411,Nuts and Dry Fruits,381
+412,Tea and Coffee,381
+413,Snacks,381
+414,Spices,381
+415,Cereals,381
+416,Juices,381
+417,Oils,382
+418,Baby Care,382
+419,Board Games,385
+420,White rice,386
+421,Brown rice,386
+422,Red rice,386
+423,Sunflower oil,387
+424,Coconut oil,387
+425,Groundnut oil,387
+426,Rice flour,389
+427,Besan flour,389
+428,Wheat flour,389
+429,Chana dal,390
+430,Toor dal,390
+431,Mango pickle,410
+432,Tomato pickle,410
+433,Soaps,391
+434,Face wash,391
+435,Rose water,391
+436,Shampoo,392
+437,Hair oil,392
+438,Henna,392
+439,Bath powder,393
+440,Skin care,393
+441,Face packs,394
+442,Soaps,394
+443,Kajal,395
+444,Oils,417
+445,Body wash,417
+446,Essentail oils,417
+447,Laundry,418
+448,Baby oils,418
+449,Amla churna,398
+450,kashayam,398
+451,Memory booster,398
+452,Men,399
+453,Female,399
+454,Anti Aging,572
+455,Antioxidant,400
+456,Juice,401
+457,Syrup,401
+458,Ark,401
+459,Dhoop sticks,403
+460,Agarbatti,403
+461,Mosquito coils,403
+462,Attar,404
+463,Camphor,404
+464,Cd,405
+465,Books,406
+466,Board games,419
+467,Darjeeling tea,412
+468,Green tea,412
+469,Ginger tea,412
+470,lemon tea,412
+471,Masala Tea,412
+472,Turmeric powder,414
+473,Coriander powder,414
+474,Garam masala powder,414
+475,Red chilly powder,414
+476,Jaggery powder,414
+477,Dhaniy powder,414
+478,Flax seeds powder,414
+479,Butter,393
+480,chamomile Tea,412
+481,White Tea,412
+482,Moringa Mint Tea,412
+483,Creams,394
+484,Face Toner,394
+485,Amla Candies,411
+486,Amla Dry Fruits,411
+487,Dry Fruits,411
+488,Mixed Spices,414
+489,Lamps,385
+490,Flakes,415
+491,Harippa Seeds,415
+492,Jowar,415
+493,Misc,415
+494,Rawa,415
+495,Bajra flour,389
+496,Corn flour,389
+497,Maida flour,389
+498,Ragi flour,389
+499,Jowar flour,389
+500,Apple,416
+501,Mango,416
+502,Orange,416
+503,Amla pickle,410
+504,Almonds,487
+505,cashew,487
+506,Kismis,487
+507,Safflower,387
+508,Mustard oil,387
+509,Narayan tel,387
+510,Bengal gram,390
+511,Green Moong Dal,390
+512,Masoor Dal,390
+513,Moong Dal,390
+514,Urad Dal,390
+515,Laddu,413
+516,Basmathi Rice,386
+517,Hand wash,393
+518,Bone and Joint,572
+519,Fenugreek,414
+520,Papads,413
+521,Chikkies,413
+522,Room Cleanser,385
+523,Soaps,392
+524,Brain and Memory,400
+525,Breast,400
+526,Biscuits,413
+527,Poha,413
+528,Flakes,413
+529,Digestive Health,400
+530,Hair and Nail,572
+531,Heart,400
+532,Immunity,400
+533,Liver Health,400
+534,Muscle,572
+535,Sexual,400
+536,Sugar Control,400
+537,Weight Loss,400
+538,Assam Tea,412
+539,Black Tea,412
+540,Hair and skin,530
+541,Hair Fall and Acne,530
+542,Whitening and Acne,530
+543,Tulsi Tea,412
+544,Hair Care Powder,392
+545,Supplements,384
+546,Body Building,545
+547,Flax Seed Oil Capsules,545
+548,Iron,545
+549,Veg Supplements,545
+550,Herbal Tea,412
+551,General Health,400
+552,Black Rice,386
+553,Sona Masoori Hand Pound Rice,386
+554,Sonamasoori Polished Rice,386
+555,Essentail oils,387
+556,Ghee,387
+557,Black Seseame Oil,387
+558,Rice Barn Oil,387
+559,Olive Oil,387
+560,Lemon Pickle,410
+561,Massage Oils,417
+562,Infertility,400
+563,UTI,400
+564,Hairs,572
+565,PMS,400
+566,Combs,392
+567,Eyes and Vision,400
+568,Prana Shakthi,383
+569,Floor Cleaners,385
+570,Floor Cleaners,383
+571,Soaps,383
+572,"Hair, Skin and Bones",384
+573,Combo Packs,2
+574,Piles,400
+575,Dung Cakes,383
+576,Body Mists,404
+577,Board games1,419
+578,Books1,406
+579,Iron Utensils,385
+580,Copper Utensils,385
+581,Water Bottles,580
+582,Brass utensils,385
+583,Netra Jyothi,395
+584,Venigars,381
+585,Brand,2
+586,18 Again,585
+587,24 Mantra,585
+589,Adarsh Goseva,585
+590,Add Veda,585
+591,Akshaya's,585
+592,Amlamrut,585
+593,Amrita Drugs,585
+594,Anamalaiyar's,585
+595,Ancient Living,585
+596,Apurva Organics,585
+597,Arogya Rahasya,585
+598,Aum Fresh,585
+599,Aushadhi Bhavan,585
+600,Banjara's,585
+601,Being Desi,585
+602,Deha Organics,585
+603,Dhampure,585
+604,Dr.Patkar's,585
+605,Eco Remedies,585
+606,Gau Naturals,585
+607,Gita Bhavan,585
+608,Goratna,585
+609,Goseva-Gokripa,585
+610,Gou Ganga,585
+611,Gow Darbar,585
+612,Green Farm,585
+613,Grenera Organics,585
+614,Harippa,585
+615,Health Sutra,585
+616,Hillarious Ayurveda,585
+617,Honest Enterprises,585
+618,Indus Valley,585
+619,Inlife,585
+620,Kairali,585
+621,Khadi,585
+622,Neautralise Naturals,585
+623,Organic India,585
+624,Organic Wellness,585
+625,Organicana,585
+626,Prakruthivanam,585
+627,Sampradayam,585
+628,Sanatan,585
+629,Shreeji Spa,585
+630,Terra Greens,585
+631,True Elements,585
+632,Veda,585
+633,Vitro,585
+634,Woods and Petals,585
+635,Zenith,585

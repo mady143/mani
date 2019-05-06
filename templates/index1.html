@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </head>
+  <title>Chatbot</title>
+  <body>
+    <!-- <h3>A web implementation of <a href="https://github.com/gunthercox/ChatterBot">ChatterBot</a> using Flask.</h3> -->
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Hi! I'm Chatterbot.</span></p>
+      </div>
+      <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Message">
+        <input class='btn btn-primary' id="buttonInput" type="submit" value="Send"><br><br>
+
+        <button class='btn btn-success' type="submit" id = "speechInput"><i class="fas fa-microphone"></i></button>
+
+        <br>
+        <br>
+      </div>
+      <script>
+        var i = 0;
+        var botHtml = ' ';
+
+        function getBotResponse(data = null) {
+          
+          var rawText = data ? data : $("#textInput").val();
+          //console.log("dattaa",data)
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          //var speechText = $("#speechInput").val();
+          //var userHtml = '<p class="userText"><span>' + speechText + '</span></p>';
+          $("#textInput").val("");
+          //$("#speechInput").val(""); 
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get", { msg: rawText }).done(function(data) {
+            regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+            console.log("myfunc", data)
+            var l;
+            var botHtml = 'The available categories/products are :<br>';
+
+            if (data.includes("&&"))
+            {
+              var res = data.slice(2);
+              var res = res.split('&&');
+              //console.log("res[0]", res[0]);
+              //console.log("res[1]", res[1])
+              for (l in res)
+              {
+               console.log("tfidf", res[l])
+               if (regexp.test(res[l]))
+               {
+                 i++
+                 var final1 = res[l].substr(res[l].indexOf('=') + 1);
+                 var final2 = final1.replace(/\+|\"/g, ' ');
+                 console.log("url_tfidf", final2)
+                  botHtml = botHtml+ '<br>' +'<button  class="botText btn btn-success" style="background-color:#E4EA71;margin-right:10px;margin-top:12px;color:black;"><a href="'+res[l]+'" target="_blank">' +"Click here for "+ final2 + " Products"+ '</a></button>';
+                  '<div id ="qtyinput">'
+                  botHtml = botHtml + '<br>' + '<input id="qtyInput'+i+'" type="text" class="form-control" name="qty" placeholder="Enter the qty(1-9) of the products to be added into the cart" style="margin-top: 10px;margin-left:10px">'+'<button class="btn btn-primary" style="margin-top: 12px;margin-left:10px" type="submit" value="'+ final2 +'" onclick="myCart(this.value,'+i+')" id ="cart"><i class="fas fa-shopping-cart"></i> Add TO Cart</button>';
+               }
+               else if (data == '&&')
+               {
+                    var botHtml = '<p class="botText"><span>Not Available</span></p>';
+               }
+               else 
+               {
+                   var res2 = res[l];
+                   botHtml = botHtml+ '<br>' +'<button id = "myButton1" value="'+ res2 +'" style="background-color:#E4EA71;margin-right:10px;margin-top:10px;color:black;" onclick="myFunction(this.value)" class="botText btn btn-success" >' +"Click here for "+ res2 + " Products"+ '</button>';
+               }
+              }
+              
+            }
+            else if (data.includes('**'))
+             {
+                data = data.slice(2);
+                if (regexp.test(data))
+                {
+                  var final1 = data.substr(data.indexOf('=') + 1);
+                 var final2 = final1.replace(/\+|\"/g, ' ');
+                 console.log("url_tfidf", final2)
+                 botHtml = botHtml+ '<br>' +'<button id = "myButton1"  class="botText btn btn-success" style="background-color:#E4EA71;margin-right:10px;margin-top:10px;color:black;"><a href="'+data+'" target="_blank">' +"Click here for "+ final2 + " Products"+ '</button>';
+                 }
+                 else
+                 { 
+                //console.log("else data",data) 
+                var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+                }
+              }
+            else
+            { 
+                console.log("else data",data) 
+                var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+            }
+
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          });
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        
+        $("#buttonInput").click(function() {
+          getBotResponse();
+        });
+        $("#speechInput").click(function() {
+          $.get("/get_speech").done(function(data) {
+            $("#textInput").val(data)
+          
+          });
+        })
+        $("#qty").keyup(function(){
+         if ($(this).val() > 10){
+          alert("No numbers above 10");
+          $(this).val('10');
+         }
+        });
+        function myFunction(e) {
+           getBotResponse(e);
+           }
+        function myCart(data = null, id)
+         { 
+          console.log("id", id)
+          //quantity = document.getElementById('qty').value;
+          quantity = $("#qtyInput"+ id).val();
+          console.log('qty', quantity)
+          var rawText = data ? data : $("#textInput").val();
+          //var userHtml = '<p class="userText"><span>' + rawText + '</span></p>'; 
+          var userHtml = '<p class="userText"><span> Added to Cart </span></p>'; 
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get_cart", { msg: rawText, quantity: quantity }).done(function(data) 
+          {
+          if (regexp.test(data))
+            {
+             console.log("cart_data", data)
+             botHtml = '<button class="botText btn btn-primary" id="checkout onclick = myCheckout() "style="background-color:#E4EA71;margin-right:10px;margin-top:10px;color:black;"><a href="'+data+'" target="_blank">' +"Click here for check out "+ '</a></button>';
+            }
+          else
+             {
+          var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+                }
+          $("#chatbox").append(botHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+           });
+          }
+      </script>
+    </div>
+  </body>
+</html>
